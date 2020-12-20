@@ -7,4 +7,5 @@ python -m torch.distributed.launch \
     shapeprop/tools/train_net.py \
     --config-file configs/bdd100k_mask_rcnn_r50_fpn_1x.yml \
     --local_rank 4
+    --num_gpu 1
 # Evaluate

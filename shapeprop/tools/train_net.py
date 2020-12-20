@@ -142,6 +142,11 @@ def main():
         type=int,
     )
     parser.add_argument(
+        '--num_gpu',
+        default=1,
+        type=int,
+    )
+    parser.add_argument(
         "opts",
         help="Modify config options using the command-line",
         default=None,
@@ -150,7 +155,7 @@ def main():
 
     args = parser.parse_args()
 
-    num_gpus = int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 1
+    num_gpus = args.num_gpu
     args.distributed = num_gpus > 1
 
     if args.distributed:
@@ -159,7 +164,7 @@ def main():
             backend="nccl", init_method="env://"
         )
         synchronize()
-        
+
     torch.manual_seed(args.seed) 
     torch.cuda.manual_seed(args.seed) 
     random.seed(args.seed) 
