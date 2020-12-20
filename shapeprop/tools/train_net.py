@@ -9,6 +9,8 @@ from shapeprop.utils.env import setup_environment  # noqa F401 isort:skip
 
 import argparse
 import os
+import random
+import numpy as np
 
 import torch
 from shapeprop.config import cfg
@@ -135,6 +137,11 @@ def main():
         action="store_true",
     )
     parser.add_argument(
+        '--seed',
+        default=0,
+        type=int,
+    )
+    parser.add_argument(
         "opts",
         help="Modify config options using the command-line",
         default=None,
@@ -152,6 +159,13 @@ def main():
             backend="nccl", init_method="env://"
         )
         synchronize()
+        
+    torch.manual_seed(args.seed) 
+    torch.cuda.manual_seed(args.seed) 
+    random.seed(args.seed) 
+    np.random.seed(args.seed) 
+    torch.backends.cudnn.enabled = True 
+    torch.backends.cudnn.benchmark = True
 
     cfg.merge_from_file(args.config_file)
     cfg.merge_from_list(args.opts)
