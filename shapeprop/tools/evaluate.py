@@ -36,38 +36,36 @@ if __name__ == '__main__':
     )
     parser.add_argument(
         "--dataset",
-        default="datasets/coco/annotations/instances_val2017.json",
+        default="/shared/xudongliu/bdd100k/labels/ins_seg/ins_seg_val.json",
         metavar="D",
         help="path to validation json file",
     )
 
     args = parser.parse_args()
     per_class_APs = classwise_evaluate(args.dataset, args.prediction)
-    voc_category_names = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 
-        'bus', 'train', 'boat', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 
-        'bottle', 'chair', 'couch', 'potted plant', 'dining table', 'tv']
+    # voc_category_names = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 
+    #     'bus', 'train', 'boat', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 
+    #     'bottle', 'chair', 'couch', 'potted plant', 'dining table', 'tv']
     all_set = dict()
-    voc_set = dict()
-    non_voc_set = dict()
+    # voc_set = dict()
+    # non_voc_set = dict()
     for k, v in per_class_APs.items():
         metric, name = k.split('_')
         if not metric in all_set.keys():
             all_set[metric] = []
         all_set[metric].append(v)
-        if not metric in voc_set.keys():
-            voc_set[metric] = []
-        if name in voc_category_names:
-            voc_set[metric].append(v)
-        if not metric in non_voc_set.keys():
-            non_voc_set[metric] = []
-        if not name in voc_category_names:
-            non_voc_set[metric].append(v)
+        # if not metric in voc_set.keys():
+        #     voc_set[metric] = []
+        # if name in voc_category_names:
+        #     voc_set[metric].append(v)
+        # if not metric in non_voc_set.keys():
+        #     non_voc_set[metric] = []
+        # if not name in voc_category_names:
+        #     non_voc_set[metric].append(v)
 
     print('\n')
     for set_name, select_set in [
-        ('All set (80 categories)', all_set),
-        ('VOC set (20 categories)', voc_set),
-        ('Non-VOC set (60 categories)', non_voc_set)]:
+        ('All set (8 categories)', all_set),]:
         print(set_name)
         print(', '.join([f'{metric}: {100 * sum(select_set[metric]) / len(select_set[metric]):.1f}' \
             for metric in ['AP', 'AP50', 'AP75', 'APs', 'APm', 'APl']]))
