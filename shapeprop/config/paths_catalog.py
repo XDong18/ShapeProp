@@ -51,8 +51,8 @@ class DatasetCatalog(object):
         elif name.startswith("bdd"):
             attrs = DatasetCatalog.DATASETS[name]
             args = dict(
-                root=os.path.join(data_dir, attrs["img_dir"]),
-                ann_file=os.path.join(data_dir, attrs["ann_file"])
+                root=attrs["img_dir"],
+                ann_file=attrs["ann_file"]
             )
             return dict(
                 factory="BDD100kDataset",
