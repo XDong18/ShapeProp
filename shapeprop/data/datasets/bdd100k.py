@@ -50,7 +50,7 @@ class BDD100kDataset(torchvision.datasets.coco.CocoDetection):
         self._transforms = transforms
 
     def __getitem__(self, idx):
-        img, anno = super(COCODataset, self).__getitem__(idx)
+        img, anno = super(BDD100kDataset, self).__getitem__(idx)
 
         # filter crowd annotations
         # TODO might be better to add an extra field
