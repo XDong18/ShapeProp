@@ -26,11 +26,11 @@ class DatasetCatalog(object):
             "ann_file": "coco/annotations/instances_train2017_non_voc_category.json"
         },
         "bdd100k_train": {
-            "img_dir": "/shared/xudongliu/bdd100k/10k/train"
+            "img_dir": "/shared/xudongliu/bdd100k/10k/train",
             "ann_file": "/shared/xudongliu/bdd100k/labels/ins_seg/ins_seg_train.json"
         },
         "bdd100k_val":{
-            "img_dir": "/shared/xudongliu/bdd100k/10k/val"
+            "img_dir": "/shared/xudongliu/bdd100k/10k/val",
             "ann_file": "/shared/xudongliu/bdd100k/labels/ins_seg/ins_seg_val.json"
         }
     }
