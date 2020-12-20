@@ -5,5 +5,6 @@ python -m torch.distributed.launch \
     --nproc_per_node=8 \
     --master_port=3000 \
     shapeprop/tools/train_net.py \
-    --config-file configs/bdd100k_mask_rcnn_r50_fpn_1x.yml
+    --config-file configs/bdd100k_mask_rcnn_r50_fpn_1x.yml \
+    --local_rank 4
 # Evaluate
