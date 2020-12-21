@@ -163,8 +163,8 @@ def main():
     if args.distributed:
         torch.cuda.set_device(args.local_rank)
         # rank = int(os.environ['RANK'])
-        num_gpus = torch.cuda.device_count()
-        torch.cuda.set_device(rank % num_gpus)
+        # num_gpus = torch.cuda.device_count()
+        # torch.cuda.set_device(rank % num_gpus)
         torch.distributed.init_process_group(
             backend="nccl", init_method="env://"
         )
