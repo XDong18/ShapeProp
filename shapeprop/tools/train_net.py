@@ -52,6 +52,7 @@ def train(cfg, local_rank, distributed):
     if distributed:
         model = torch.nn.parallel.DistributedDataParallel(
             model,
+            device_ids=[torch.cuda.current_device()],
             # this should be removed if we update BatchNorm stats
             broadcast_buffers=False,
         )
@@ -160,7 +161,10 @@ def main():
     args.distributed = num_gpus > 1
 
     if args.distributed:
-        # torch.cuda.set_device(args.local_rank)
+        torch.cuda.set_device(args.local_rank)
+        # rank = int(os.environ['RANK'])
+        num_gpus = torch.cuda.device_count()
+        torch.cuda.set_device(rank % num_gpus)
         torch.distributed.init_process_group(
             backend="nccl", init_method="env://"
         )
