@@ -127,7 +127,7 @@ def make_data_loader(cfg, is_train=True, is_distributed=False, start_iter=0):
     if images_per_gpu > 1:
         logger = logging.getLogger(__name__)
         logger.warning(
-            str(images_per_gpu)
+            str(images_per_gpu),
             "When using more than one image per GPU you may encounter "
             "an out-of-memory (OOM) error if your GPU does not have "
             "sufficient memory. If this happens, you can reduce "
