@@ -171,7 +171,8 @@ def main():
         #     backend="nccl", init_method="env://"
         # )
         # synchronize()
-        # TODO ditributed 
+        # TODO ditributed
+        pass
 
     torch.manual_seed(args.seed) 
     torch.cuda.manual_seed(args.seed) 
