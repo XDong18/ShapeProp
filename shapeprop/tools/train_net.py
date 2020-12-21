@@ -52,7 +52,7 @@ def train(cfg, local_rank, distributed):
     if distributed:
         model = torch.nn.parallel.DistributedDataParallel(
             model,
-            device_ids=[torch.cuda.current_device()],
+            device_ids=[1],
             output_device=1,
             # this should be removed if we update BatchNorm stats
             broadcast_buffers=False,
