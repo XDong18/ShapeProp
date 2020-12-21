@@ -63,6 +63,7 @@ def do_train(
 
         scheduler.step()
 
+        print('device check', model.device)
         images = images.to(device)
         targets = [target.to(device) for target in targets]
 

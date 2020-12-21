@@ -38,7 +38,7 @@ except ImportError:
 def train(cfg, local_rank, distributed):
     model = build_detection_model(cfg)
     device = torch.device(cfg.MODEL.DEVICE)
-    # model.to(device)
+    model.to(device)
 
     optimizer = make_optimizer(cfg, model)
     scheduler = make_lr_scheduler(cfg, optimizer)
@@ -47,7 +47,7 @@ def train(cfg, local_rank, distributed):
     use_mixed_precision = cfg.DTYPE == "float16"
     amp_opt_level = 'O0'
     amp_opt_level = 'O1' if use_mixed_precision else 'O0'
-    # model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level) # TODO temp deleted
+    model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level) # TODO temp deleted
 
     # if distributed: # TODO distributed if
     model = torch.nn.DataParallel(model).cuda()
