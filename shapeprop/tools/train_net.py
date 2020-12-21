@@ -50,13 +50,14 @@ def train(cfg, local_rank, distributed):
     model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level)
 
     if distributed:
-        model = torch.nn.parallel.DistributedDataParallel(
-            model,
-            device_ids=[1],
-            output_device=1,
-            # this should be removed if we update BatchNorm stats
-            broadcast_buffers=False,
-        )
+        model = torch.nn.DataParallel(model)
+        # model = torch.nn.parallel.DistributedDataParallel(
+        #     model,
+        #     device_ids=[1],
+        #     output_device=1,
+        #     # this should be removed if we update BatchNorm stats
+        #     broadcast_buffers=False,
+        # )
 
     arguments = {}
     arguments["iteration"] = 0
@@ -162,14 +163,15 @@ def main():
     args.distributed = num_gpus > 1
 
     if args.distributed:
-        torch.cuda.set_device(args.local_rank)
+        # torch.cuda.set_device(args.local_rank)
         # rank = int(os.environ['RANK'])
         # num_gpus = torch.cuda.device_count()
         # torch.cuda.set_device(rank % num_gpus)
-        torch.distributed.init_process_group(
-            backend="nccl", init_method="env://"
-        )
-        synchronize()
+        # torch.distributed.init_process_group(
+        #     backend="nccl", init_method="env://"
+        # )
+        # synchronize()
+        # TODO ditributed 
 
     torch.manual_seed(args.seed) 
     torch.cuda.manual_seed(args.seed) 
