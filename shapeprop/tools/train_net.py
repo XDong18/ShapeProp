@@ -47,7 +47,7 @@ def train(cfg, local_rank, distributed):
     use_mixed_precision = cfg.DTYPE == "float16"
     amp_opt_level = 'O0'
     amp_opt_level = 'O1' if use_mixed_precision else 'O0'
-    model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level)
+    # model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level) # TODO temp deleted
 
     if distributed:
         model = torch.nn.DataParallel(model)
