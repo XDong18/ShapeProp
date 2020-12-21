@@ -49,8 +49,8 @@ def train(cfg, local_rank, distributed):
     amp_opt_level = 'O1' if use_mixed_precision else 'O0'
     model, optimizer = amp.initialize(model, optimizer, opt_level=amp_opt_level) # TODO temp deleted
 
-    if distributed:
-        model = torch.nn.DataParallel(model).cuda()
+    # if distributed: # TODO distributed if
+    model = torch.nn.DataParallel(model).cuda()
         # model = torch.nn.parallel.DistributedDataParallel(
         #     model,
         #     device_ids=[1],
@@ -95,8 +95,8 @@ def train(cfg, local_rank, distributed):
 
 
 def run_test(cfg, model, distributed):
-    if distributed:
-        model = model.module
+    # if distributed: # TODO distributed aborted
+    model = model.module
     torch.cuda.empty_cache()  # TODO check if it helps
     iou_types = ("bbox",)
     if cfg.MODEL.MASK_ON:
@@ -160,7 +160,7 @@ def main():
     args = parser.parse_args()
 
     num_gpus = args.num_gpu
-    args.distributed = num_gpus > 1
+    args.distributed = False
 
     if args.distributed:
         # torch.cuda.set_device(args.local_rank)
