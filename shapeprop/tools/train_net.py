@@ -128,7 +128,7 @@ def run_test(cfg, model, distributed):
 
 def main():
     rlimit = resource.getrlimit(resource.RLIMIT_NOFILE)
-    resource.setrlimit(resource.RLIMIT_NOFILE, (2048, rlimit[1]))
+    resource.setrlimit(resource.RLIMIT_NOFILE, (4096, rlimit[1]))
     parser = argparse.ArgumentParser(description="PyTorch Object Detection Training")
     parser.add_argument(
         "--config-file",
