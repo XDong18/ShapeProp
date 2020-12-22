@@ -2,7 +2,7 @@ MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
   MASK_ON: True
   SHAPEPROP_ON: False
-  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
+  WEIGHT: "/shared/xudongliu/code/ShapeProp/runs/bdd100k_mask_rcnn_r50_fpn_3x/last_checkpoint"
   BACKBONE:
     CONV_BODY: "R-50-FPN"
   RESNETS:
