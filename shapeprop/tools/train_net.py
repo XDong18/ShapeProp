@@ -34,6 +34,8 @@ try:
 except ImportError:
     raise ImportError('Use APEX for multi-precision via apex.amp')
 
+import resource
+
 
 def train(cfg, local_rank, distributed):
     model = build_detection_model(cfg)
@@ -125,6 +127,8 @@ def run_test(cfg, model, distributed):
 
 
 def main():
+    rlimit = resource.getrlimit(resource.RLIMIT_NOFILE)
+    resource.setrlimit(resource.RLIMIT_NOFILE, (2048, rlimit[1]))
     parser = argparse.ArgumentParser(description="PyTorch Object Detection Training")
     parser.add_argument(
         "--config-file",
