@@ -2,7 +2,7 @@ MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
   MASK_ON: True
   SHAPEPROP_ON: False
-  WEIGHT: "/shared/xudongliu/code/ShapeProp/runs/bdd100k_mask_rcnn_r50_fpn_3x/model_0010000.pth"
+  WEIGHT: "/shared/xudongliu/code/ShapeProp/runs/bdd100k_mask_rcnn_r50_fpn_3x/model_final.pth"
   BACKBONE:
     CONV_BODY: "R-50-FPN"
   RESNETS:
