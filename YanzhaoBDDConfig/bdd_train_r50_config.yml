@@ -178,6 +178,31 @@ MODEL:
     RESOLUTION: 28
     SHARE_BOX_FEATURE_EXTRACTOR: false
     USE_GN: false
+  ROI_PROP_HEAD:
+    CONV_LAYERS: *id001
+    DILATION: 1
+    LATENT_DIM: 32
+    LOSS_SCALE: 1.0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_SCALES: &id002
+    - 0.25
+    - 0.125
+    - 0.0625
+    - 0.03125
+    USE_GN: false
+  ROI_VCUE_HEAD:
+    AGGREGATION: mean
+    CONV_LAYERS: *id001
+    DILATION: 1
+    ENABLE_FINETUNE: false
+    LOSS_SCALE: 1.0
+    PEAK_UPSAMPLE: 1
+    PEAK_WINDOW_SIZE: 3
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_SCALES: *id002
+    USE_GN: false
   RPN:
     ANCHOR_SIZES: *id003
     ANCHOR_STRIDE:
@@ -207,7 +232,7 @@ MODEL:
   TUNED_PARTS: []
   VCUE_ON: false
   WEIGHT: catalog://ImageNetPretrained/MSRA/R-50
-OUTPUT_DIR: "runs/bdd100k_mask_rcnn_r50_fpn_yanzhao"
+OUTPUT_DIR: ./runs/vcue/train_wo_vcue/run001/output
 PATHS_CATALOG: /root/Workspace/Exps/MRN/mrn/config/paths_catalog.py
 SOLVER:
   BASE_LR: 0.02
