@@ -200,8 +200,6 @@ MODEL:
     STRADDLE_THRESH: 0
     USE_FPN: true
   RPN_ONLY: false
-  TUNED_PARTS: []
-  VCUE_ON: false
   WEIGHT: catalog://ImageNetPretrained/MSRA/R-50
 OUTPUT_DIR: runs/bdd100k_mask_rcnn_r50_fpn_yanzhao
 SOLVER:
