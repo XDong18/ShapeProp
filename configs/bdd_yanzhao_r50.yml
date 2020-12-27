@@ -62,7 +62,6 @@ MODEL:
     RPN_HEAD_BLOCKS: 0
     SCALE_FACTOR: 1.0
     WIDTH_DIVISOR: 1
-  FIXED_PARTS: []
   FPN:
     USE_GN: false
     USE_RELU: false
